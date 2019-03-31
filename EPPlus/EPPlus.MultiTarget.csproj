@@ -272,11 +272,14 @@ Release Candidate changes
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
+    <PackageReference Include="SixLabors.ImageSharp.Drawing">
+      <Version>1.0.0-beta0006</Version>
+    </PackageReference>
     <PackageReference Include="System.ComponentModel.TypeConverter" Version="4.3.0" />
     <PackageReference Include="System.Data.Common" Version="4.3.0" />
-    <PackageReference Include="System.Drawing.Common">
+    <!--<PackageReference Include="System.Drawing.Common">
       <Version>4.5.1</Version>
-    </PackageReference>
+    </PackageReference>-->
     <PackageReference Include="System.Reflection" Version="4.3.0" />
     <PackageReference Include="System.Security.Claims" Version="4.3.0" />
     <PackageReference Include="System.Security.Cryptography.Pkcs" Version="4.5.1" />

@@ -34,7 +34,11 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using OfficeOpenXml.Utils;
+#if Core
+using EPPlus.ImageSharp;
+#else
 using System.Drawing;
+#endif
 using System.Globalization;
 using System.Xml;
 

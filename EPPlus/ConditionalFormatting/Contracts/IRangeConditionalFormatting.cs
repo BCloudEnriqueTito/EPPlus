@@ -29,7 +29,11 @@
  * Eyal Seagull		    Conditional Formatting    2012-04-03
  *******************************************************************************/
 using OfficeOpenXml.ConditionalFormatting.Contracts;
+#if Core
+using EPPlus.ImageSharp;
+#else
 using System.Drawing;
+#endif
 
 namespace OfficeOpenXml.ConditionalFormatting
 {

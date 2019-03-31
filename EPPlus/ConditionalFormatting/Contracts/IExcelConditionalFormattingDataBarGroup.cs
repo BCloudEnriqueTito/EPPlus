@@ -34,7 +34,11 @@ using System.Linq;
 using System.Text;
 
 using OfficeOpenXml.ConditionalFormatting;
+#if Core
+using EPPlus.ImageSharp;
+#else
 using System.Drawing;
+#endif
 
 namespace OfficeOpenXml.ConditionalFormatting.Contracts
 {

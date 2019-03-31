@@ -35,8 +35,12 @@ using System.Globalization;
 using System.Text;
 using System.Xml;
 using System.IO;
+#if Core
+using EPPlus.ImageSharp;
+#else
 using System.Drawing;
 using System.Drawing.Imaging;
+#endif
 using System.Diagnostics;
 using OfficeOpenXml.Utils;
 using OfficeOpenXml.Compatibility;
@@ -195,6 +199,7 @@ namespace OfficeOpenXml.Drawing
 
             }
         }
+#if NETFULL
         internal static ImageFormat GetImageFormat(string contentType)
         {
             switch (contentType.ToLower(CultureInfo.InvariantCulture))
@@ -217,7 +222,9 @@ namespace OfficeOpenXml.Drawing
                     return ImageFormat.Jpeg;
 
             }
-        }        //Add a new image to the compare collection
+        }
+#endif
+        //Add a new image to the compare collection
         private void AddNewPicture(byte[] img, string relID)
         {
             var newPic = new ExcelDrawings.ImageCompare();
@@ -225,7 +232,7 @@ namespace OfficeOpenXml.Drawing
             newPic.relID = relID;
             //_drawings._pics.Add(newPic);
         }
-        #endregion
+#endregion
         private string SavePicture(Image image)
         {
 #if (Core)
@@ -262,8 +269,8 @@ namespace OfficeOpenXml.Drawing
         private void SetPosDefaults(Image image)
         {
             EditAs = eEditAs.OneCell;
-            SetPixelWidth(image.Width, image.HorizontalResolution);
-            SetPixelHeight(image.Height, image.VerticalResolution);
+            SetPixelWidth(image.Width, (float)image.HorizontalResolution);
+            SetPixelHeight(image.Height, (float)image.VerticalResolution);
         }
 
         private string PicStartXml()
@@ -332,6 +339,7 @@ namespace OfficeOpenXml.Drawing
                 }
             }
         }
+        #if NETFULL
         ImageFormat _imageFormat=ImageFormat.Jpeg;
         /// <summary>
         /// Image format
@@ -348,6 +356,7 @@ namespace OfficeOpenXml.Drawing
                 _imageFormat = value;
             }
         }
+        #endif
         internal string ContentType
         {
             get;
@@ -372,8 +381,8 @@ namespace OfficeOpenXml.Drawing
                 _width = (int)(_width * ((decimal)Percent / 100));
                 _height = (int)(_height * ((decimal)Percent / 100));
 
-                SetPixelWidth(_width, Image.HorizontalResolution);
-                SetPixelHeight(_height, Image.VerticalResolution);
+                SetPixelWidth(_width, (float)Image.HorizontalResolution);
+                SetPixelHeight(_height, (float)Image.VerticalResolution);
             }
         }
         internal Uri UriPic { get; set; }

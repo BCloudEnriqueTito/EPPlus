@@ -34,7 +34,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml;
 using System.Globalization;
+#if Core
+using EPPlus.ImageSharp;
+#else
 using System.Drawing;
+#endif
 
 namespace OfficeOpenXml.Drawing.Vml
 {

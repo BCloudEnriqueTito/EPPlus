@@ -37,7 +37,11 @@ using OfficeOpenXml.Utils;
 using System.Xml;
 using OfficeOpenXml.ConditionalFormatting.Contracts;
 using System.Text.RegularExpressions;
+#if Core
+using EPPlus.ImageSharp;
+#else
 using System.Drawing;
+#endif
 
 namespace OfficeOpenXml.ConditionalFormatting
 {

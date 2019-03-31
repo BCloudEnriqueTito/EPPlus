@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+#if Core
+using EPPlus.ImageSharp;
+#else
 using System.Drawing;
 using System.Drawing.Imaging;
+#endif
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -12,6 +16,9 @@ namespace OfficeOpenXml.Compatibility
     {
         internal static byte[] GetImageAsByteArray(Image image)
         {
+        #if Core
+            return image.GetImageAsByteArray();
+        #else
             var ms = new MemoryStream();
             if (image.RawFormat.Guid == ImageFormat.Gif.Guid)
             {
@@ -35,6 +42,7 @@ namespace OfficeOpenXml.Compatibility
             }
 
             return ms.ToArray();
+            #endif
         }
     }
 }

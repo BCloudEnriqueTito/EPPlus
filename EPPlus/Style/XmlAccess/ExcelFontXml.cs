@@ -30,10 +30,12 @@
  * Jan Källman		License changed GPL-->LGPL 2011-12-16
  *******************************************************************************/
 using System;
-using System.Collections.Generic;
+#if Core
+using EPPlus.ImageSharp;
+#else
 using System.Drawing;
+#endif
 using System.Globalization;
-using System.Text;
 using System.Xml;
 namespace OfficeOpenXml.Style.XmlAccess
 {
@@ -269,7 +271,7 @@ namespace OfficeOpenXml.Style.XmlAccess
                 _verticalAlign=value;
             }
         }
-        public void SetFromFont(System.Drawing.Font Font)
+        public void SetFromFont(Font Font)
         {
             Name=Font.Name;
             //Family=fnt.FontFamily.;

@@ -706,8 +706,12 @@ namespace OfficeOpenXml
                         if(!workSheet.Workbook._package.Package.PartExists(uri))
                         {
                             var picPart = workSheet.Workbook._package.Package.CreatePart(uri, pic.ContentType, CompressionLevel.None);
-                            pic.Image.Save(picPart.GetStream(FileMode.Create, FileAccess.Write), ExcelPicture.GetImageFormat(pic.ContentType));
-                        }
+#if NETFULL
+                        pic.Image.Save(picPart.GetStream(FileMode.Create, FileAccess.Write), ExcelPicture.GetImageFormat(pic.ContentType));
+#elif Core
+                        pic.Image.Save(picPart.GetStream(FileMode.Create, FileAccess.Write));
+#endif
+                    }
                         
                         var rel = part.CreateRelationship(UriHelper.GetRelativeUri(workSheet.WorksheetUri, uri), Packaging.TargetMode.Internal, ExcelPackage.schemaRelationships + "/image");
                         //Fixes problem with invalid image when the same image is used more than once.
@@ -887,8 +891,8 @@ namespace OfficeOpenXml
             }
             return xmlDoc;
 		}
-		#endregion
-		#region Delete Worksheet
+#endregion
+#region Delete Worksheet
 		/// <summary>
 		/// Deletes a worksheet from the collection
 		/// </summary>
@@ -996,7 +1000,7 @@ namespace OfficeOpenXml
                 throw (new ArgumentException("Worksheet is not in the collection."));
             }
         }
-        #endregion
+#endregion
 		internal void ReindexWorksheetDictionary()
 		{
 			var index = _pck._worksheetAdd;
@@ -1089,7 +1093,7 @@ namespace OfficeOpenXml
             }
             return (xlWorksheet);
         }
-        #region MoveBefore and MoveAfter Methods
+#region MoveBefore and MoveAfter Methods
 		/// <summary>
 		/// Moves the source worksheet to the position before the target worksheet
 		/// </summary>

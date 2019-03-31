@@ -33,7 +33,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using OfficeOpenXml.Style.XmlAccess;
+#if Core
+using EPPlus.ImageSharp;
+#else
 using System.Drawing;
+#endif
 
 namespace OfficeOpenXml.Style
 {

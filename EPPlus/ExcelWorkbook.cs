@@ -47,17 +47,15 @@ using OfficeOpenXml.Utils;
 using OfficeOpenXml.FormulaParsing;
 using OfficeOpenXml.FormulaParsing.LexicalAnalysis;
 using OfficeOpenXml.Packaging.Ionic.Zip;
-using System.Drawing;
-using OfficeOpenXml.Style;
 using OfficeOpenXml.Compatibility;
 
 namespace OfficeOpenXml
 {
-	#region Public Enum ExcelCalcMode
-	/// <summary>
-	/// How the application should calculate formulas in the workbook
-	/// </summary>
-	public enum ExcelCalcMode
+    #region Public Enum ExcelCalcMode
+    /// <summary>
+    /// How the application should calculate formulas in the workbook
+    /// </summary>
+    public enum ExcelCalcMode
 	{
 		/// <summary>
 		/// Indicates that calculations in the workbook are performed automatically when cell values change. 

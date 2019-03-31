@@ -29,22 +29,17 @@
  * Eyal Seagull        Added       		  2012-04-03
  *******************************************************************************/
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Drawing;
 using System.Xml;
 using OfficeOpenXml.Utils;
-using System.Text.RegularExpressions;
 using OfficeOpenXml.ConditionalFormatting.Contracts;
 using OfficeOpenXml.Style.Dxf;
 
 namespace OfficeOpenXml.ConditionalFormatting
 {
-  /// <summary>
-  /// 
-  /// </summary>
-  public abstract class ExcelConditionalFormattingRule
+    /// <summary>
+    /// 
+    /// </summary>
+    public abstract class ExcelConditionalFormattingRule
     : XmlHelper,
     IExcelConditionalFormattingRule
   {

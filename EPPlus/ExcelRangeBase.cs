@@ -39,7 +39,12 @@ using System.Threading;
 using OfficeOpenXml.FormulaParsing;
 using OfficeOpenXml.Style;
 using System.Xml;
+#if Core
+using EPPlus.ImageSharp;
+using FontStyle = SixLabors.Fonts.FontStyle;
+#else
 using System.Drawing;
+#endif
 using System.Globalization;
 using System.Collections;
 using OfficeOpenXml.Table;
@@ -857,13 +862,16 @@ namespace OfficeOpenXml
             var nf = styles.Fonts[styles.CellXfs[0].FontId];
             var fs = FontStyle.Regular;
             if (nf.Bold) fs |= FontStyle.Bold;
+            #if NETFULL
             if (nf.UnderLine) fs |= FontStyle.Underline;
-            if (nf.Italic) fs |= FontStyle.Italic;
             if (nf.Strike) fs |= FontStyle.Strikeout;
+            #endif
+            if (nf.Italic) fs |= FontStyle.Italic;
+            
             var nfont = new Font(nf.Name, nf.Size, fs);
 
             var normalSize = Convert.ToSingle(ExcelWorkbook.GetWidthPixels(nf.Name, nf.Size));
-
+#if NETFULL
             Bitmap b;
             Graphics g = null;
             try
@@ -877,7 +885,7 @@ namespace OfficeOpenXml
             {
                 return;
             }
-
+#endif
             foreach (var cell in this)
             {
                 if (_worksheet.Column(cell.Start.Column).Hidden)    //Issue 15338
@@ -895,9 +903,11 @@ namespace OfficeOpenXml
                     var fnt = styles.Fonts[fntID];
                     fs = FontStyle.Regular;
                     if (fnt.Bold) fs |= FontStyle.Bold;
-                    if (fnt.UnderLine) fs |= FontStyle.Underline;
                     if (fnt.Italic) fs |= FontStyle.Italic;
+#if NETFULL
+                    if (fnt.UnderLine) fs |= FontStyle.Underline;
                     if (fnt.Strike) fs |= FontStyle.Strikeout;
+#endif
                     f = new Font(fnt.Name, fnt.Size, fs);
                     //f = new wm.Typeface(new System.Windows.Media.FontFamily(fnt.Name), fnt.Italic ? System.Windows.FontStyles.Italic : System.Windows.FontStyles.Normal, fnt.Bold ? System.Windows.FontWeights.Bold : System.Windows.FontWeights.Normal, System.Windows.FontStretches.Normal);
 
@@ -906,8 +916,11 @@ namespace OfficeOpenXml
                 var ind = styles.CellXfs[cell.StyleID].Indent;
                 var textForWidth = cell.TextForWidth;
                 var t = textForWidth + (ind > 0 && !string.IsNullOrEmpty(textForWidth) ? new string('_', ind) : "");
+#if NETFULL
                 var size = g.MeasureString(t, f, 10000, StringFormat.GenericDefault);
-
+#elif Core
+                var size = f.MeasureSize(t);
+#endif
                 //var ft = new wm.FormattedText(t, CultureInfo.CurrentCulture, w.FlowDirection.LeftToRight,
                 //    f,
                 //    styles.Fonts[fntID].Size, System.Windows.Media.Brushes.Black);
@@ -1516,8 +1529,8 @@ namespace OfficeOpenXml
                 return fullAddress;
             }
         }
-        #endregion
-        #region Private Methods
+#endregion
+#region Private Methods
         /// <summary>
         /// Set the value without altering the richtext property
         /// </summary>
@@ -1785,9 +1798,9 @@ namespace OfficeOpenXml
                 }
             }
         }
-        #endregion
-        #region Public Methods
-        #region ConditionalFormatting
+#endregion
+#region Public Methods
+#region ConditionalFormatting
         /// <summary>
         /// Conditional Formatting for this range.
         /// </summary>
@@ -1798,8 +1811,8 @@ namespace OfficeOpenXml
                 return new RangeConditionalFormatting(_worksheet, new ExcelAddress(Address));
             }
         }
-        #endregion
-        #region DataValidation
+#endregion
+#region DataValidation
         /// <summary>
         /// Data validation for this range.
         /// </summary>
@@ -1810,8 +1823,8 @@ namespace OfficeOpenXml
                 return new RangeDataValidation(_worksheet, Address);
             }
         }
-        #endregion
-        #region LoadFromDataReader
+#endregion
+#region LoadFromDataReader
         /// <summary>
         /// Load the data from the datareader starting from the top left cell of the range
         /// </summary>
@@ -1870,9 +1883,9 @@ namespace OfficeOpenXml
             }
             return _worksheet.Cells[_fromRow, _fromCol, row - 1, _fromCol + fieldCount - 1];
         }
-        #endregion
+#endregion
 
-        #region LoadFromDataTable
+#region LoadFromDataTable
         /// <summary>
         /// Load the data from the datatable starting from the top left cell of the range
         /// </summary>
@@ -1935,9 +1948,9 @@ namespace OfficeOpenXml
 
             return _worksheet.Cells[_fromRow, _fromCol, _fromRow + rowArray.Count - 1, _fromCol + Table.Columns.Count - 1];
         }
-        #endregion
+#endregion
 
-        #region LoadFromArrays
+#region LoadFromArrays
         /// <summary>
         /// Loads data from the collection of arrays of objects into the range, starting from
         /// the top-left cell.
@@ -1976,8 +1989,8 @@ namespace OfficeOpenXml
 
             return _worksheet.Cells[_fromRow, _fromCol, _fromRow + rowArray.Count - 1, _fromCol + maxColumn - 1];
         }
-        #endregion
-        #region LoadFromCollection
+#endregion
+#region LoadFromCollection
         /// <summary>
         /// Load a collection into a the worksheet starting from the top left row of the range.
         /// </summary>
@@ -2141,8 +2154,8 @@ namespace OfficeOpenXml
             }
             return r;
         }
-        #endregion
-        #region LoadFromText
+#endregion
+#region LoadFromText
         /// <summary>
         /// Loads a CSV text into a range starting from the top left cell.
         /// Default settings is Comma separation
@@ -2377,8 +2390,8 @@ namespace OfficeOpenXml
         {
             return LoadFromText(File.ReadAllText(TextFile.FullName, Format.Encoding), Format, TableStyle, FirstRowIsHeader);
         }
-        #endregion
-        #region GetValue
+#endregion
+#region GetValue
 
         /// <summary>
         ///     Convert cell value to desired type, including nullable structs.
@@ -2407,7 +2420,7 @@ namespace OfficeOpenXml
         {
             return ConvertUtil.GetTypedCellValue<T>(Value);
         }
-        #endregion
+#endregion
         /// <summary>
         /// Get a range with an offset from the top left cell.
         /// The new range has the same dimensions as the current range
@@ -2787,16 +2800,16 @@ namespace OfficeOpenXml
                 Worksheet.MergedCells.Remove(item);
             }
         }
-        #endregion
-        #region IDisposable Members
+#endregion
+#region IDisposable Members
 
         public void Dispose()
         {
             //_worksheet = null;            
         }
 
-        #endregion
-        #region "Enumerator"
+#endregion
+#region "Enumerator"
         CellsStoreEnumerator<ExcelCoreValue> cellEnum;
         public IEnumerator<ExcelRangeBase> GetEnumerator()
         {
@@ -2866,7 +2879,7 @@ namespace OfficeOpenXml
             _enumAddressIx = -1;
             cellEnum = new CellsStoreEnumerator<ExcelCoreValue>(_worksheet._values, _fromRow, _fromCol, _toRow, _toCol);
         }
-        #endregion
+#endregion
         private struct SortItem<T>
         {
             internal int Row { get; set; }

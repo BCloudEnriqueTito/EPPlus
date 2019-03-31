@@ -33,7 +33,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+#if Core
+using EPPlus.ImageSharp;
+#else
 using System.Drawing;
+#endif
 using System.Globalization;
 using System.IO;
 using System.Security;

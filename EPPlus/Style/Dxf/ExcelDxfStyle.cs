@@ -4,7 +4,11 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Xml;
+#if Core
+using EPPlus.ImageSharp;
+#else
 using System.Drawing;
+#endif
 
 namespace OfficeOpenXml.Style.Dxf
 {

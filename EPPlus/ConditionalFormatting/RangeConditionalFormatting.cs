@@ -32,6 +32,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+#if Core
+using EPPlus.ImageSharp;
+#else
+using System.Drawing;
+#endif
 using OfficeOpenXml.Utils;
 using OfficeOpenXml.ConditionalFormatting.Contracts;
 
@@ -518,7 +523,7 @@ namespace OfficeOpenXml.ConditionalFormatting
     /// </summary>
     /// <param name="Color">The color of the databar</param>
     /// <returns></returns>
-    public IExcelConditionalFormattingDataBarGroup AddDatabar(System.Drawing.Color Color)
+    public IExcelConditionalFormattingDataBarGroup AddDatabar(Color Color)
     {
         var rule = (IExcelConditionalFormattingDataBarGroup)(_worksheet.ConditionalFormatting.AddRule(
           eExcelConditionalFormattingRuleType.DataBar,

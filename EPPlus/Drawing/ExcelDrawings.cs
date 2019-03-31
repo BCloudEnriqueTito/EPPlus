@@ -35,7 +35,11 @@ using System.Text;
 using System.Xml;
 using System.Collections;
 using System.IO;
+#if Core
+using EPPlus.ImageSharp;
+#else
 using System.Drawing;
+#endif
 using System.Linq;
 using OfficeOpenXml.Drawing.Chart;
 using OfficeOpenXml.Table.PivotTable;

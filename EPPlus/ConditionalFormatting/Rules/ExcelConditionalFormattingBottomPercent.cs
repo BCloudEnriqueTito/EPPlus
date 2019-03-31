@@ -28,20 +28,15 @@
  * ******************************************************************************
  * Eyal Seagull        Added       		  2012-04-03
  *******************************************************************************/
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Drawing;
 using System.Xml;
 using OfficeOpenXml.ConditionalFormatting.Contracts;
 
 namespace OfficeOpenXml.ConditionalFormatting
 {
-  /// <summary>
-  /// ExcelConditionalFormattingBottomPercent
-  /// </summary>
-  public class ExcelConditionalFormattingBottomPercent
+    /// <summary>
+    /// ExcelConditionalFormattingBottomPercent
+    /// </summary>
+    public class ExcelConditionalFormattingBottomPercent
     : ExcelConditionalFormattingRule,
     IExcelConditionalFormattingTopBottomGroup
   {

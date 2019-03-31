@@ -3,7 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+#if Core
+using EPPlus.ImageSharp;
+#else
 using System.Drawing;
+#endif
 using System.Xml;
 using System.Globalization;
 

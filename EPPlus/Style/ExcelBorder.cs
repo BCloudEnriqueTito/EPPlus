@@ -33,6 +33,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using OfficeOpenXml.Style.XmlAccess;
+#if Core
+using EPPlus.ImageSharp;
+#else
+using System.Drawing;
+#endif
 
 namespace OfficeOpenXml.Style
 {
@@ -156,7 +161,7 @@ namespace OfficeOpenXml.Style
         /// </summary>
         /// <param name="Style">The border style</param>
         /// <param name="Color">The color of the border</param>
-        public void BorderAround(ExcelBorderStyle Style, System.Drawing.Color Color)
+        public void BorderAround(ExcelBorderStyle Style, Color Color)
         {            
             var addr=new ExcelAddress(_address);
             SetBorderAroundStyle(Style, addr);

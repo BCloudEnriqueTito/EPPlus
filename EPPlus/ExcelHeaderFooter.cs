@@ -33,7 +33,11 @@
 using System;
 using System.Xml;
 using System.Text.RegularExpressions;
+#if Core
+using EPPlus.ImageSharp;
+#else
 using System.Drawing;
+#endif
 using System.Collections.Generic;
 using OfficeOpenXml.Drawing.Vml;
 using System.IO;

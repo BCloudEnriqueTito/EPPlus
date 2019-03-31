@@ -30,13 +30,9 @@
  * Jan Källman		License changed GPL-->LGPL 2011-12-16
  *******************************************************************************/
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 using System.Xml;
 using OfficeOpenXml.Drawing.Chart;
-using System.Drawing;
 using OfficeOpenXml.Style.XmlAccess;
 
 namespace OfficeOpenXml.Drawing

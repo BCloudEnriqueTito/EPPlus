@@ -34,7 +34,11 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using System.Xml;
+#if Core
+using EPPlus.ImageSharp;
+#else
 using System.Drawing;
+#endif
 
 namespace OfficeOpenXml.Drawing.Chart
 {

@@ -34,6 +34,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml;
 using System.Globalization;
+#if Core
+using EPPlus.ImageSharp;
+#else
+using System.Drawing;
+#endif
 namespace OfficeOpenXml.Style.XmlAccess
 {
     /// <summary>
@@ -170,7 +175,7 @@ namespace OfficeOpenXml.Style.XmlAccess
             _rgb = "";
             _auto = false;
         }
-        public void SetColor(System.Drawing.Color color)
+        public void SetColor(Color color)
         {
             Clear();
             _rgb = color.ToArgb().ToString("X");
