@@ -2,24 +2,28 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net35;net40</TargetFrameworks>
-    <AssemblyVersion>4.5.3.1</AssemblyVersion>
-    <FileVersion>4.5.3.1</FileVersion>
-    <Version>0.1</Version>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+    <FileVersion>0.2.0.0</FileVersion>
+    <Version>0.2</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseUrl>https://licenses.nuget.org/LGPL-3.0-or-later</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/wengang/EPPlus</PackageProjectUrl>
     <Authors>Wengang</Authors>
     <Company></Company>
     <Product>EPPlus</Product>
-    <Description>Forked from EPPlus,Use ImageSharp Instead System.Drawing.Common</Description>
+    <Description>
+Forked from EPPlus,Use ImageSharp Instead System.Drawing.Common In order to run on rh&amp;centos 6.x
+</Description>
     <AssemblyName>EPPlus</AssemblyName>
     <RootNamespace>EPPlus</RootNamespace>
     <RepositoryUrl></RepositoryUrl>
     <PackageTags>Excel ooxml</PackageTags>
     <Copyright>Jan Källman 2018</Copyright>
-    <PackageReleaseNotes>EPPlusSharp 0.1
-
-Base on EPPlus 4.5.3.1
+    <PackageReleaseNotes>EPPlusSharp 0.2
+package font files as manifest resource
+EPPlusSharp 0.1
+Forked from EPPlus,Use ImageSharp Instead System.Drawing.Common
+Packaged Cabin,Heebo,Lato,Roboto 4 kind fonts
 
 New features in version 4.5:
 * .NET Core support
@@ -290,6 +294,92 @@ Release Candidate changes
     <PackageReference Include="System.Text.Encoding.CodePages" Version="4.5.0" />
     <PackageReference Include="System.Xml.XmlDocument" Version="4.3.0" />
     <PackageReference Include="System.Xml.XPath.XmlDocument" Version="4.3.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="ImageSharp\Fonts\Cabin\Cabin-Bold.ttf" />
+    <None Remove="ImageSharp\Fonts\Cabin\Cabin-BoldItalic.ttf" />
+    <None Remove="ImageSharp\Fonts\Cabin\Cabin-Italic.ttf" />
+    <None Remove="ImageSharp\Fonts\Cabin\Cabin-Medium.ttf" />
+    <None Remove="ImageSharp\Fonts\Cabin\Cabin-MediumItalic.ttf" />
+    <None Remove="ImageSharp\Fonts\Cabin\Cabin-Regular.ttf" />
+    <None Remove="ImageSharp\Fonts\Cabin\Cabin-SemiBold.ttf" />
+    <None Remove="ImageSharp\Fonts\Cabin\Cabin-SemiBoldItalic.ttf" />
+    <None Remove="ImageSharp\Fonts\Cabin\OFL.txt" />
+    <None Remove="ImageSharp\Fonts\Heebo\Heebo-Black.ttf" />
+    <None Remove="ImageSharp\Fonts\Heebo\Heebo-Bold.ttf" />
+    <None Remove="ImageSharp\Fonts\Heebo\Heebo-ExtraBold.ttf" />
+    <None Remove="ImageSharp\Fonts\Heebo\Heebo-Light.ttf" />
+    <None Remove="ImageSharp\Fonts\Heebo\Heebo-Medium.ttf" />
+    <None Remove="ImageSharp\Fonts\Heebo\Heebo-Regular.ttf" />
+    <None Remove="ImageSharp\Fonts\Heebo\Heebo-Thin.ttf" />
+    <None Remove="ImageSharp\Fonts\Heebo\OFL.txt" />
+    <None Remove="ImageSharp\Fonts\Lato\Lato-Black.ttf" />
+    <None Remove="ImageSharp\Fonts\Lato\Lato-BlackItalic.ttf" />
+    <None Remove="ImageSharp\Fonts\Lato\Lato-Bold.ttf" />
+    <None Remove="ImageSharp\Fonts\Lato\Lato-BoldItalic.ttf" />
+    <None Remove="ImageSharp\Fonts\Lato\Lato-Hairline.ttf" />
+    <None Remove="ImageSharp\Fonts\Lato\Lato-HairlineItalic.ttf" />
+    <None Remove="ImageSharp\Fonts\Lato\Lato-Italic.ttf" />
+    <None Remove="ImageSharp\Fonts\Lato\Lato-Light.ttf" />
+    <None Remove="ImageSharp\Fonts\Lato\Lato-LightItalic.ttf" />
+    <None Remove="ImageSharp\Fonts\Lato\Lato-Regular.ttf" />
+    <None Remove="ImageSharp\Fonts\Lato\OFL.txt" />
+    <None Remove="ImageSharp\Fonts\Roboto\LICENSE.txt" />
+    <None Remove="ImageSharp\Fonts\Roboto\Roboto-Black.ttf" />
+    <None Remove="ImageSharp\Fonts\Roboto\Roboto-BlackItalic.ttf" />
+    <None Remove="ImageSharp\Fonts\Roboto\Roboto-Bold.ttf" />
+    <None Remove="ImageSharp\Fonts\Roboto\Roboto-BoldItalic.ttf" />
+    <None Remove="ImageSharp\Fonts\Roboto\Roboto-Italic.ttf" />
+    <None Remove="ImageSharp\Fonts\Roboto\Roboto-Light.ttf" />
+    <None Remove="ImageSharp\Fonts\Roboto\Roboto-LightItalic.ttf" />
+    <None Remove="ImageSharp\Fonts\Roboto\Roboto-Medium.ttf" />
+    <None Remove="ImageSharp\Fonts\Roboto\Roboto-MediumItalic.ttf" />
+    <None Remove="ImageSharp\Fonts\Roboto\Roboto-Regular.ttf" />
+    <None Remove="ImageSharp\Fonts\Roboto\Roboto-Thin.ttf" />
+    <None Remove="ImageSharp\Fonts\Roboto\Roboto-ThinItalic.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ImageSharp\Fonts\Cabin\Cabin-Bold.ttf" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Cabin\Cabin-BoldItalic.ttf" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Cabin\Cabin-Italic.ttf" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Cabin\Cabin-Medium.ttf" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Cabin\Cabin-MediumItalic.ttf" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Cabin\Cabin-Regular.ttf" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Cabin\Cabin-SemiBold.ttf" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Cabin\Cabin-SemiBoldItalic.ttf" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Cabin\OFL.txt" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Heebo\Heebo-Black.ttf" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Heebo\Heebo-Bold.ttf" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Heebo\Heebo-ExtraBold.ttf" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Heebo\Heebo-Light.ttf" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Heebo\Heebo-Medium.ttf" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Heebo\Heebo-Regular.ttf" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Heebo\Heebo-Thin.ttf" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Heebo\OFL.txt" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Lato\Lato-Black.ttf" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Lato\Lato-BlackItalic.ttf" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Lato\Lato-Bold.ttf" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Lato\Lato-BoldItalic.ttf" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Lato\Lato-Hairline.ttf" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Lato\Lato-HairlineItalic.ttf" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Lato\Lato-Italic.ttf" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Lato\Lato-Light.ttf" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Lato\Lato-LightItalic.ttf" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Lato\Lato-Regular.ttf" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Lato\OFL.txt" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Roboto\LICENSE.txt" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Roboto\Roboto-Black.ttf" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Roboto\Roboto-BlackItalic.ttf" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Roboto\Roboto-Bold.ttf" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Roboto\Roboto-BoldItalic.ttf" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Roboto\Roboto-Italic.ttf" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Roboto\Roboto-Light.ttf" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Roboto\Roboto-LightItalic.ttf" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Roboto\Roboto-Medium.ttf" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Roboto\Roboto-MediumItalic.ttf" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Roboto\Roboto-Regular.ttf" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Roboto\Roboto-Thin.ttf" />
+    <EmbeddedResource Include="ImageSharp\Fonts\Roboto\Roboto-ThinItalic.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Update="readme.txt">

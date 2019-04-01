@@ -35,14 +35,12 @@ using System.Text;
 using System.IO;
 using OfficeOpenXml;
 using System.Xml;
-#if Core
+
 using EPPlus.ImageSharp;
-using FontStyle = SixLabors.Fonts.FontStyle;
-#else
-using System.Drawing;
-#endif
+
+
 using OfficeOpenXml.Style;
-namespace EPPlusSamples
+namespace EPPlusSharpSampleApp
 {
 	class Sample1
 	{
@@ -58,24 +56,24 @@ namespace EPPlusSamples
                 ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Inventory");
                 //Add the headers
                 worksheet.Cells[1, 1].Value = "ID";
-                worksheet.Cells[1, 2].Value = "Product";
-                worksheet.Cells[1, 3].Value = "Quantity";
-                worksheet.Cells[1, 4].Value = "Price";
-                worksheet.Cells[1, 5].Value = "Value";
+                worksheet.Cells[1, 2].Value = "产品";
+                worksheet.Cells[1, 3].Value = "数量";
+                worksheet.Cells[1, 4].Value = "价格";
+                worksheet.Cells[1, 5].Value = "金额";
 
                 //Add some items...
                 worksheet.Cells["A2"].Value = 12001;
-                worksheet.Cells["B2"].Value = "Nails";
+                worksheet.Cells["B2"].Value = "火龙果";
                 worksheet.Cells["C2"].Value = 37;
                 worksheet.Cells["D2"].Value = 3.99;
 
                 worksheet.Cells["A3"].Value = 12002;
-                worksheet.Cells["B3"].Value = "Hammer";
+                worksheet.Cells["B3"].Value = "西瓜";
                 worksheet.Cells["C3"].Value = 5;
                 worksheet.Cells["D3"].Value = 12.10;
 
                 worksheet.Cells["A4"].Value = 12003;
-                worksheet.Cells["B4"].Value = "Saw";
+                worksheet.Cells["B4"].Value = "凤梨";
                 worksheet.Cells["C4"].Value = 12;
                 worksheet.Cells["D4"].Value = 15.37;
 
@@ -87,7 +85,7 @@ namespace EPPlusSamples
                 {
                     range.Style.Font.Bold = true;
                     range.Style.Fill.PatternType = ExcelFillStyle.Solid;
-                    range.Style.Fill.BackgroundColor.SetColor(Color.Black);
+                    range.Style.Fill.BackgroundColor.SetColor(Color.SkyBlue);
                     range.Style.Font.Color.SetColor(Color.White);
                 }
 
@@ -111,7 +109,7 @@ namespace EPPlusSamples
                 worksheet.Cells.AutoFitColumns(0);  //Autofit columns for all cells
 
                 // lets set the header text 
-                worksheet.HeaderFooter.OddHeader.CenteredText = "&24&U&\"Arial,Regular Bold\" Inventory";
+                worksheet.HeaderFooter.OddHeader.CenteredText = "&24&U&\"Arial,Regular Bold\" 账单";
                 // add the page number to the footer plus the total number of pages
                 worksheet.HeaderFooter.OddFooter.RightAlignedText =
                     string.Format("Page {0} of {1}", ExcelHeaderFooter.PageNumber, ExcelHeaderFooter.NumberOfPages);
@@ -127,9 +125,9 @@ namespace EPPlusSamples
                 worksheet.View.PageLayoutView = true;
 
                 // set some document properties
-                package.Workbook.Properties.Title = "Invertory";
+                package.Workbook.Properties.Title = "账单";
                 package.Workbook.Properties.Author = "Jan Källman";
-                package.Workbook.Properties.Comments = "This sample demonstrates how to create an Excel 2007 workbook using EPPlus";
+                package.Workbook.Properties.Comments = "这个样例验收怎样使用EPPlus 生成一个  Excel 2007 工作表";
 
                 // set some extended property values
                 package.Workbook.Properties.Company = "AdventureWorks Inc.";

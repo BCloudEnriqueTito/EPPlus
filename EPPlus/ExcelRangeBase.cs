@@ -867,8 +867,11 @@ namespace OfficeOpenXml
             if (nf.Strike) fs |= FontStyle.Strikeout;
             #endif
             if (nf.Italic) fs |= FontStyle.Italic;
-            
+            #if NETFULL
             var nfont = new Font(nf.Name, nf.Size, fs);
+            #else
+            var nfont = Font.CreateFont(nf.Name, nf.Size, fs);
+            #endif
 
             var normalSize = Convert.ToSingle(ExcelWorkbook.GetWidthPixels(nf.Name, nf.Size));
 #if NETFULL
@@ -908,7 +911,11 @@ namespace OfficeOpenXml
                     if (fnt.UnderLine) fs |= FontStyle.Underline;
                     if (fnt.Strike) fs |= FontStyle.Strikeout;
 #endif
+#if NETFULL
                     f = new Font(fnt.Name, fnt.Size, fs);
+#elif Core
+                    f = Font.CreateFont(fnt.Name, fnt.Size, fs);
+#endif
                     //f = new wm.Typeface(new System.Windows.Media.FontFamily(fnt.Name), fnt.Italic ? System.Windows.FontStyles.Italic : System.Windows.FontStyles.Normal, fnt.Bold ? System.Windows.FontWeights.Bold : System.Windows.FontWeights.Normal, System.Windows.FontStretches.Normal);
 
                     fontCache.Add(fntID, f);
